@@ -1,26 +1,11 @@
 import NavigationBar from 'react-native-navbar'
-import React,{Component} from 'react'
-import {StyleSheet, View} from 'react-native'
-import {Router, Route, Animations, Schema} from 'react-native-redux-router'
-
-
+import React, { Component } from 'react';
+import {StyleSheet, View,Alert} from 'react-native'
+import {Actions} from 'react-native-redux-router'
 
 class NavBarBase extends Component {
-   onPrev(){
-       var Actions = this.props.routes;
-       if (this.props.onPrev){
-           this.props.onPrev();
-           return;
-       }
-       if (this.props.navigator && this.props.navigator.getCurrentRoutes().length > 1){
-           Actions.pop();
-       }
-   }
-
    render() {
-       var Actions = this.props.routes;
-       console.log("Props : " + this.props);
-       return <NavigationBar style={styles.navBar}
+       return <NavigationBar style={{ backgroundColor: '#0db0d9'}}
                              titleColor='white'
                              buttonsColor='white'
                              statusBar= {{style:'light-content', hidden: false}}
@@ -28,29 +13,28 @@ class NavBarBase extends Component {
                              prevTitle={this.props.initial ? " " : null}
                              leftButton = {this.props.leftButton ? this.props.leftButton : {title:''}}
                              rightButton = {this.props.rightButton ? this.props.rightButton : {title:''}}
-
-
-
            />
    }
 }
-export class NavBar extends Component {
+export class AddRoomBar extends Component {
+    constructor(props) {
+        super(props)
+        var navigator = this.props.navigator
+        navigator.__onRightButtonPressed = this.__onRightButtonPressed.bind(this)
+    }
+
+   __onRightButtonPressed() {
+   }
+
    render() {
-     var Actions = this.props.routes;
-       return <NavBarBase customNext={<View/>} {...this.props} leftButton={{title:'Left', handler:this.props.onPrev || Actions.pop}}/>
+       return <NavBarBase  {...this.props} leftButton={{title:'Về', handler:this.props.onPrev || this.props.routes.pop}}
+       rightButton={{title:'Lưu', handler: () => this.props.navigator.__onRightButtonPressed()  }}/>
    }
 }
 
-
-export class NavBarModal extends Component {
+export class ListRoomBar extends Component {
    render() {
-     var Actions = this.props.routes;
-       return <NavBarBase customPrev={<View/>} nextTitle="Close" {...this.props} rightButton={{title:'Close', handler:this.props.onNext || Actions.pop}}/>
+       return <NavBarBase {...this.props}  rightButton={{title:'Thêm', handler: Actions.addRoom}}/>
    }
 }
 
-var styles = StyleSheet.create({
-   navBar: {
-       backgroundColor: '#0db0d9'
-   },
-});

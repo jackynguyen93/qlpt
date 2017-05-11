@@ -7,11 +7,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "@taw/react-native-popover": "git+https://github.com/agilityworks-uk/react-native-popover.git#release/2.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
     "react-native-card-view": "0.0.3",
+    "react-native-datepicker": "^1.4.7",
+    "react-native-modal": "^2.3.2",
     "react-native-navbar": "^1.7.1",
     "react-native-redux-router": "^1.0.7",
+    "react-native-simple-radio-button": "^2.5.0-alpha.1",
+    "react-native-textinput-effects": "^0.3.1",
+    "react-native-vector-icons": "^4.1.0",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
